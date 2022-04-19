@@ -167,7 +167,8 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -191,7 +192,9 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
 ];
