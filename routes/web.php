@@ -54,6 +54,8 @@ Route::post('medicine-add',[OrderController::class,'MedicineAdd'])->name('medici
 Route::post('medicine-submit',[OrderController::class,'MedicineSubmit'])->name('medicineSubmit');
 Route::get('print-pdf/{id}',[OrderController::class,'PDF_print'])->name('printpdf');
 Route::get('order-edit/{id}',[OrderController::class,'Orderedit'])->name('orderedit');
+Route::post('order-edit-submit',[OrderController::class,'OrdereditSubmit'])->name('OrdereditSubmit');
+Route::post('order-delete',[OrderController::class,'Orderdelete'])->name('Orderdelete');
 
-// Route::get('demo',[DataTableAjaxCRUDController::class,'demo']);
-Route::view('demo','demo');
+Route::get('demo',[DataTableAjaxCRUDController::class,'demo']);
+// Route::view('demo','demo');

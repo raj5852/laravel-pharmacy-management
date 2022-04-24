@@ -22,12 +22,16 @@ class DataTableAjaxCRUDController extends Controller
         }
         return view('companies');
     }
-    function demo(Request $request){
-        $demo = User::first();
-        $json1 = '{"aaaa": "bbb"}';
-        $array[] = json_decode($json1, true);
-        $array[] = json_decode($demo, true);
-         return $array;
+    function demo(){
+        $a = [4,5];
+        $b = [5,2];
+        $arr = [];
+
+        foreach($a as $key=>$val){
+            $xx = $val*$b[$key];
+            array_push($arr,$xx);
+        }
+        return array_sum($arr);
 
     }
 

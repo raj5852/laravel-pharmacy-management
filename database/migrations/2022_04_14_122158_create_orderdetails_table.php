@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders');
             $table->string('name');
             $table->string('expiry');
+            $table->string('medicineid');
             $table->string('quantity');
             $table->string('unitprice');
             $table->string('qusumunit');

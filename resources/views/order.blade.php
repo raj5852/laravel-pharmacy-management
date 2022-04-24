@@ -83,7 +83,7 @@
                         </div>
 
 
-                        {{-- modal end --}}
+
                     </div>
 
 
@@ -91,57 +91,59 @@
             </div>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-    @endsection
-    @section('js-add')
-        <script src="{{ asset('js/dataTables.min.js') }}"></script>
-        <script>
-            $(document).ready(function() {
+    </div>
+    <!-- /.content-wrapper -->
+@endsection
+@section('js-add')
+    <script src="{{ asset('js/dataTables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $('#order-management').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: "{{ route('ordermanagement') }}",
-                    columns: [{
-                            data: 'id',
-                            name: 'id'
-                        },
-                        {
-                            data: 'patientname',
-                            name: 'patientname'
-                        },
-                        {
-                            data: 'amount',
-                            name: 'amount'
-                        },
-                        {
-                            data: 'type',
-                            name: 'type'
-                        },
-                        {
-                            data: 'created_at',
-                            name: 'created_at'
-                        },
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: false
-                        },
-                    ],
-                    order: [
-                        [0, 'desc']
-                    ]
-                });
-
-
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
-        </script>
-        <script>
+            $('#order-management').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('ordermanagement') }}",
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'patientname',
+                        name: 'patientname'
+                    },
+                    {
+                        data: 'amount',
+                        name: 'amount'
+                    },
+                    {
+                        data: 'type',
+                        name: 'type'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false
+                    },
+                ],
+                order: [
+                    [0, 'desc']
+                ]
+            });
 
-        </script>
-    @endsection
+
+        });
+
+
+       
+    </script>
+
+@endsection

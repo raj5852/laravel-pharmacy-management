@@ -7,11 +7,10 @@ use App\Models\Medicineper;
 use App\Models\Order;
 use App\Models\Orderdetail;
 use PDF;
-use Illuminate\Support\Facades\App;
 
 class OrderController extends Controller
 {
-    //
+
     function index()
     {
         if (request()->ajax()) {
@@ -63,11 +62,11 @@ class OrderController extends Controller
     }
     function MedicineSubmit(Request $request)
     {
-        // return $request->all();
+        // return $request->all(); ids
         $total = $request->Tl_amount;
-        if($request->payment_type == 'বাকি'){
+        if ($request->payment_type == 'বাকি') {
             $baki = $total -= $request->baki_message;
-        }else{
+        } else {
             $baki = 0;
         }
 
@@ -100,6 +99,7 @@ class OrderController extends Controller
             $orderDet->order_id = $orderId;
             $orderDet->name = $value->name;
             $orderDet->expiry = $value->expairdate;
+            $orderDet->medicineid = $request->ids[$key];
             $orderDet->quantity = $quantitys[$key];
             $orderDet->unitprice = $value->saleprice;
             $orderDet->qusumunit = $unantunit[$key];
@@ -121,7 +121,7 @@ class OrderController extends Controller
         $find = Order::find($request->id);
         if ($find) {
             $data = [
-                'order' => Order::where('id',$request->id)->with('orderdetail')->get()
+                'order' => Order::where('id', $request->id)->with('orderdetail')->get()
             ];
 
             $pdf = PDF::loadView('pdf-print', $data);
@@ -132,8 +132,58 @@ class OrderController extends Controller
         }
     }
 
-    function Orderedit(Request $request){
-        $datas = Order::where('id',$request->id)->with('orderdetail')->get();
-        return view('order-edit',compact('datas'));
+    function Orderedit(Request $request)
+    {
+        $datas = Order::where('id', $request->id)->with('orderdetail')->get();
+        return view('order-edit', compact('datas'));
+    }
+
+    function OrdereditSubmit(Request $request)
+    {
+        // return  $request->all();
+        $id = $request->id;
+        $name = $request->name;
+        $getunitprice = $request->unitprice;
+        $quantity = $request->quantity;
+        $medicineId = $request->medicineId;
+
+
+        $arr = [];
+        foreach ($getunitprice as $key => $value) {
+            $val = $value * $quantity[$key];
+            array_push($arr, $val);
+        }
+
+        $get_totalval = array_sum($arr);
+
+        $order = Order::where('id', $id)->with('orderdetail')->get();
+        $get_amount = $order[0]->amount - $get_totalval;
+
+        if ($order[0]->type == 'বাকি') {
+            $order[0]->bike -= $get_amount ;
+            $order[0]->save();
+        }
+
+        $orderDetails = $order[0]->orderdetail;
+        $x = 0;
+
+        foreach ($orderDetails as $key => $orderdetail) {
+
+
+            $Medicineper = Medicineper::where('id', $medicineId[$key])->get();
+            $Medicineper[0]->quantity += $request->previous_quantity[$key] - $quantity[$key];
+
+            // $Medicineper[0]->quantity += 1;
+            $Medicineper[0]->save();
+
+            $orderdetail->quantity = $quantity[$key];
+            $orderdetail->qusumunit = $orderdetail->unitprice * $quantity[$key];
+            $orderdetail->save();
+            $x += $orderdetail->qusumunit;
+        }
+        $order[0]->patientname = $name;
+        $order[0]->amount = $x;
+        $order[0]->save();
+        return redirect()->route('ordermanagement')->with('message', 'Edited Successfully!');
     }
 }

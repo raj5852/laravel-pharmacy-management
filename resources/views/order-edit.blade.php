@@ -24,6 +24,7 @@
 
                 <p><a href="{{ route('ordermanagement') }}">Order Management</a> / Edit Order</p>
                 <br>
+
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
@@ -37,14 +38,16 @@
                         </div>
 
                     </div>
+
                     <div class="card-body">
 
-                        <form action="">
+                        <form action="{{ route('OrdereditSubmit') }}" method="POST">
                             @csrf
-                            {{-- <input type="hidden" name="id" id="id" value="{{}}"> --}}
+                            <input type="hidden" value="{{ $datas[0]->id }}" name="id">
                             <div class="container">
                                 <label for="name">Name</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Customer name" value="{{ $datas[0]->patientname }}" autocomplete="off">
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Customer name"
+                                    value="{{ $datas[0]->patientname }}" autocomplete="off">
                             </div>
                             <br>
                             <table class="table table-bordered" id="location-rack-management">
@@ -56,35 +59,34 @@
 
                                         <th>MRP</th>
                                         <th>Qty</th>
-                                        <th>Total price</th>
-                                        <th>Action</th>
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($datas[0]->orderdetail as  $key=>$value)
-                                    <tr>
-                                        <td>{{ $key+=1 }}</td>
+                                    @foreach ($datas[0]->orderdetail as $key => $value)
+                                        <tr>
 
-                                        <td>{{ $value->name }}</td>
-                                        <td>{{ $value->expiry }}</td>
-                                        <td><input class="form-control" type="number" name="unitprice[]" value="{{ $value->unitprice }}"></td>
-                                        <td><input class="form-control" type="number" id="quantity" name="quantity[]" value="{{ $value->quantity }}"></td>
-                                        <td id="sumprice[]">{{ $value->qusumunit }} </td>
-                                        <td><button class="btn btn-danger btn-sm">delete</button></td>
-                                    </tr>
+                                            <td>{{ $key += 1 }}</td>
+                                            <td>{{ $value->name }}</td>
+                                            <td>{{ $value->expiry }}</td>
+                                            <input type="hidden" name="unitprice[]" value="{{ $value->unitprice }}">
+                                            <td>{{ $value->unitprice }}</td>
+                                            <td>
+                                                <input type="hidden" name="medicineId[]" value="{{ $value->medicineid }}">
+                                                <input type="hidden" id="previous_quantity" name="previous_quantity[]" value="{{ $value->quantity }}">
+                                                <input class="form-control" type="number" id="quantity" min="0" name="quantity[]"
+                                                    value="{{ $value->quantity }}"></td>
 
+
+                                        </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="5" align="right"><b>Total</b></td>
-                                        <input type="hidden" name="Tl_amount" id="Tl_amount">
-                                        <td colspan="2" id="order_total_amount"></td>
-                                    </tr>
-                                </tfoot>
+
                             </table>
+                            <button id="demo" class="btn btn-info">Edit</button>
+
                         </form>
-                        <button id="demo" class="btn btn-info">click</button>
 
                     </div>
                 </div>
@@ -99,9 +101,6 @@
     <script>
         $('#order-add').addClass('active');
         var x = $('#quantity').val();
-            console.log(x)
-        $("#demo").click(function(){
-
-        })
+        // console.log($('#previous_quantity').val())
     </script>
 @endsection

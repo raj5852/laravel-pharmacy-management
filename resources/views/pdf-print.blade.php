@@ -67,6 +67,12 @@
                 </tr>
             </tfoot>
         </table>
+        <br>
+        @if ($order[0]->bike == 0)
+
+        @else
+        <p>Baki aca {{$order[0]->bike}} Taka</p>
+        @endif
     </div>
 
 </body>

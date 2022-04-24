@@ -98,7 +98,7 @@
                                             <div class="form-floation mb-3">
                                                 <label for="quantity">Medicine Quantity:</label>
                                                 <input type="number" name="quantity" id="quantity" class="form-control"
-                                                    placeholder="Medicine Quantity"  autocomplete="off" step=".01"  required>
+                                                    placeholder="Medicine Quantity"  autocomplete="off" min="0" step=".01"  required>
 
                                             </div>
                                         </div>
@@ -128,7 +128,7 @@
                                         <div class="col-md-6">
                                             <div class="form-floation mb-3">
                                                 <label for="priceperunit">price per unit</label>
-                                                <input type="number" name="priceperunit" id="priceperunit"
+                                                <input type="number" min="0" name="priceperunit" id="priceperunit"
                                                     class="form-control"  autocomplete="off" placeholder="Medicine price per unit:" step=".01" required>
 
                                             </div>
@@ -139,7 +139,7 @@
                                         <div class="col-md-4">
                                             <div class="form-floation mb-3">
                                                 <label for="sale">Sale per price:</label>
-                                                <input type="number" name="sale" id="sale" class="form-control"
+                                                <input type="number" min="0" name="sale" id="sale" class="form-control"
                                                     placeholder="Sale price" step=".01" autocomplete="off" required>
 
                                             </div>
@@ -148,7 +148,7 @@
                                         <div class="col-md-4">
                                             <div class="form-floation mb-3">
                                                 <label for="cost">Total cost</label>
-                                                <input type="number" name="cost" id="cost" class="form-control"
+                                                <input type="number" min="0" name="cost" id="cost" class="form-control"
                                                     placeholder="Total cost:" step=".01" autocomplete="off" required>
 
                                             </div>
@@ -217,7 +217,7 @@
                                         <div class="col-md-6">
                                             <div class="form-floation mb-3">
                                                 <label for="quantity_perchase">Medicine Quantity:</label>
-                                                <input type="number" name="quantity" id="quantity_perchase"
+                                                <input type="number" min="0" name="quantity" id="quantity_perchase"
                                                     class="form-control" placeholder="Medicine Quantity" step=".01" autocomplete="off" required>
 
                                             </div>
@@ -245,7 +245,7 @@
                                         <div class="col-md-6">
                                             <div class="form-floation mb-3">
                                                 <label for="priceperunit_perchase">price per unit</label>
-                                                <input type="number" name="priceperunit" id="priceperunit_perchase"
+                                                <input type="number" min="0" name="priceperunit" id="priceperunit_perchase"
                                                     class="form-control" placeholder="Medicine price per unit:" step=".01"autocomplete="off"  required>
 
                                             </div>
@@ -256,7 +256,7 @@
                                         <div class="col-md-4">
                                             <div class="form-floation mb-3">
                                                 <label for="sale_perchase">Sale per price:</label>
-                                                <input type="number" name="sale" id="sale_perchase" class="form-control"
+                                                <input type="number" min="0" name="sale" id="sale_perchase" class="form-control"
                                                     placeholder="Sale price" step=".01" autocomplete="off" required>
 
                                             </div>
@@ -265,7 +265,7 @@
                                         <div class="col-md-4">
                                             <div class="form-floation mb-3">
                                                 <label for="cost_perchase">Total cost</label>
-                                                <input type="number" name="cost" id="cost_perchase" class="form-control"
+                                                <input type="number" min="0" name="cost" id="cost_perchase" class="form-control"
                                                     placeholder="Total cost:" step=".01" autocomplete="off" required>
 
                                             </div>
