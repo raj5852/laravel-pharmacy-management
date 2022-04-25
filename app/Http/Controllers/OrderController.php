@@ -160,7 +160,7 @@ class OrderController extends Controller
         $get_amount = $order[0]->amount - $get_totalval;
 
         if ($order[0]->type == 'বাকি') {
-            $order[0]->bike -= $get_amount ;
+            $order[0]->bike -= $get_amount;
             $order[0]->save();
         }
 
@@ -185,5 +185,41 @@ class OrderController extends Controller
         $order[0]->amount = $x;
         $order[0]->save();
         return redirect()->route('ordermanagement')->with('message', 'Edited Successfully!');
+    }
+    function remainingorders()
+    {
+        if (request()->ajax()) {
+            return datatables()->of(Order::select('*')->where('type', 'বাকি'))
+
+                ->addColumn('action', 'remaining-action')
+                ->addColumn('created_at', function ($row) {
+                    // return $row->created_at->format('Y-m-d H:i:s');
+                    return $row->created_at->format('d-m-Y');
+                })
+                ->filterColumn('created_at', function ($query, $keyword) {
+                    $query->whereRaw("DATE_FORMAT(created_at,'%d-%m-%Y') like ?", ["%$keyword%"]); //date_format when searching using date
+                })
+
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+        return view('remaining-orders');
+    }
+    function remainingedit(Request $request){
+        $order = Order::find($request->id);
+        return response()->json($order);
+    }
+    function remainingeditsubmit(Request $request){
+        // return $request->all();
+            $order = Order::find($request->getId);
+            if($request->paymentType[0] == 'নগদ'){
+                $order->type = $request->paymentType[0];
+                $order->bike = 0;
+                $order->save();
+                return redirect()->route('ordermanagement')->with('message','Successfully!');
+            }
+            return redirect()->route('ordermanagement')->with('message','Not Edited!');
+
     }
 }

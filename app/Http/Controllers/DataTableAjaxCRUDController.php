@@ -22,18 +22,21 @@ class DataTableAjaxCRUDController extends Controller
         }
         return view('companies');
     }
-    function demo(){
-        $a = [4,5];
-        $b = [5,2];
-        $arr = [];
+    // function demo(){
+    //     $a = [4,5];
+    //     $b = [5,2];
+    //     $arr = [];
 
-        foreach($a as $key=>$val){
-            $xx = $val*$b[$key];
-            array_push($arr,$xx);
-        }
-        return array_sum($arr);
+    //     foreach($a as $key=>$val){
+    //         $xx = $val*$b[$key];
+    //         array_push($arr,$xx);
+    //     }
+    //     return array_sum($arr);
+
+    // }
+    function demo(){
+       return time();
 
     }
-
 
 }

@@ -56,6 +56,10 @@ Route::get('print-pdf/{id}',[OrderController::class,'PDF_print'])->name('printpd
 Route::get('order-edit/{id}',[OrderController::class,'Orderedit'])->name('orderedit');
 Route::post('order-edit-submit',[OrderController::class,'OrdereditSubmit'])->name('OrdereditSubmit');
 Route::post('order-delete',[OrderController::class,'Orderdelete'])->name('Orderdelete');
+Route::get('remaining-orders',[OrderController::class,'remainingorders'])->name('remainingorders');
+Route::post('remainingedit',[OrderController::class,'remainingedit'])->name('remainingedit');
+Route::get('remainingedit-submit',[OrderController::class,'remainingeditsubmit'])->name('remainingeditsubmit');
 
+//
 Route::get('demo',[DataTableAjaxCRUDController::class,'demo']);
 // Route::view('demo','demo');

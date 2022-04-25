@@ -13,6 +13,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0">Order Managment</h1>
+
                     </div><!-- /.col -->
                     <div class="col-sm-6">
 
@@ -39,7 +40,7 @@
                             <div class="col col-md-6 ">
                                 <i style="font-size:16px" class="fa">&#xf0ce;</i>
 
-                                Order Managment
+                                Order Managment <a href="{{ route('remainingorders') }}" style="margin-left: 40px" class="btn btn-info">সকল বাকি অর্ডার</a>
                             </div>
                             <div class="col col-md-6" align="right">
                                 <a class="btn btn-success" href="{{ route('orderadd') }}"> Add Order</a>
@@ -143,7 +144,7 @@
         });
 
 
-       
+
     </script>
 
 @endsection
